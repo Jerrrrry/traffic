@@ -1,5 +1,7 @@
 # Puppeteer examples
 
+su -s /bin/bash www-data
+
 Puppeteer Headless Chrome examples for real life use cases. Clone this repo and run them directy with a simple `node` command.
 
 ```bash
