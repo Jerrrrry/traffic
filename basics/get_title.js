@@ -20,7 +20,10 @@ const puppeteer = require('puppeteer');
     const browser = await puppeteer.launch(launchOptions)
     const page = await browser.newPage()
     await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36');
-    await page.goto('https://www.cannabiszealot.com/')
+    await page.goto('https://www.cannabiszealot.com/', {
+                waitUntil: 'networkidle2',
+                timeout: 0
+            })
     const title = await page.title()
 
     const hrefs = await page.evaluate(() => {
@@ -33,12 +36,18 @@ const puppeteer = require('puppeteer');
 
     rs= hrefs[Math.floor(Math.random() *hrefs.length)];
 
-    await page.goto(rs)
+    await page.goto(rs, {
+                waitUntil: 'networkidle2',
+                timeout: 0
+            })
     console.log(await page.title())
     await page.goBack();
 
     rs= hrefs[Math.floor(Math.random() *hrefs.length)];
-    await page.goto(rs)
+    await page.goto(rs, {
+                waitUntil: 'networkidle2',
+                timeout: 0
+            })
     console.log(await page.title())
     await page.goBack();
 
