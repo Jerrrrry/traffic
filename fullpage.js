@@ -28,7 +28,10 @@ axios.get('https://api.getproxylist.com/proxy?country[]=US&protocol[]=socks4&api
         let launchOptions = {
           args: [
             '--start-maximized',
-            '--proxy-server='+url
+            '--proxy-server='+url,
+            '--no-sandbox',
+            '--headless',
+            '--disable-gpu',
           ] // this is where we set the proxy    socks4://67.204.1.222:64312
         };
         const browser = await puppeteer.launch(launchOptions)
