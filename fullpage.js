@@ -39,7 +39,7 @@ axios.get('https://api.getproxylist.com/proxy?country[]=US&protocol[]=socks4&api
         await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36');
         await page.goto('https://www.cannabiszealot.com/', {
                     waitUntil: 'networkidle2',
-                    timeout: 0
+                    timeout: 15000
                 })
         const title = await page.title()
 
@@ -56,7 +56,7 @@ axios.get('https://api.getproxylist.com/proxy?country[]=US&protocol[]=socks4&api
           let rs=hrefs[i]
           await page.goto(rs, {
                       waitUntil: 'networkidle2',
-                      timeout: 0
+                      timeout: 15000
                   })
           console.log(await page.title())
           await sleep(3000)
