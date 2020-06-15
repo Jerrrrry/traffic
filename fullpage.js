@@ -68,6 +68,7 @@ const oneRun = async _ => {
           //   await page.goBack();
           // }
           // get the User Agent on the context of Puppeteer
+          await sleep(20000)
           const userAgent = await page.evaluate(() => navigator.userAgent );
           // If everything correct then no 'HeadlessChrome' sub string on userAgent
           console.log(userAgent);
