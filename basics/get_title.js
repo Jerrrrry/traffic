@@ -8,7 +8,7 @@
 const puppeteer = require('puppeteer');
 
 (async () => {
-  try{
+  
     const args = process.argv.slice(2)
     let proxy=args[0]
     let launchOptions = {
@@ -59,10 +59,9 @@ const puppeteer = require('puppeteer');
     // If everything correct then no 'HeadlessChrome' sub string on userAgent
     console.log(userAgent);
     await browser.close()
-  }catch(error){
-    console.log(error)
-
-  }
-
-
-})()
+})().catch(error=>{
+    console.log("bad is "+error)
+  }).then(()=>{
+    console.log('in the end')
+    await process.exit(1)
+  })
