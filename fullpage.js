@@ -43,8 +43,8 @@ const oneRun = async _ => {
         const browser = await puppeteer.launch(launchOptions)
         try{
           const page = await browser.newPage()
-          await page.emulate(iPhone);
-          //await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36');
+          //await page.emulate(iPhone);
+          await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36');
           
           await page.goto('https://www.cannabiszealot.com/', {
                         waitUntil: 'networkidle2',
