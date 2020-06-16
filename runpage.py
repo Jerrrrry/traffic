@@ -56,6 +56,8 @@ if __name__ == '__main__':
     chrome_options.add_argument('--user-agent="'+headers+'"')
         # 使用设置初始化webdriver
     driver=webdriver.Chrome(ChromeDriverManager().install()) 
+
+    
     
  
     try:
