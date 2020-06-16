@@ -3,6 +3,7 @@ import requests
 import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.opera import OperaDriverManager
 import sys
 import os
 import json
@@ -42,20 +43,29 @@ def get_ip():
  
  
 if __name__ == '__main__':
-    url = "https://cannabiszealot.com/"
+    url = "https://www.cannabiszealot.com/"
     # 无限循环，每次都要打开一个浏览器窗口，不是标签
     # 调用函数获取浏览器标识, 字符串
     headers = get_UA()
         # 调用函数获取IP代理地址,这里获取是字符串，而不是像前两个教程获得的是数组
     proxy = get_ip()
         # 使用chrome自定义
-    chrome_options = webdriver.ChromeOptions()
+    options = webdriver.ChromeOptions()
         # 设置代理
-    chrome_options.add_argument('--proxy-server='+proxy)
+    options.add_argument('--proxy-server='+proxy)
         # 设置UA
-    chrome_options.add_argument('--user-agent="'+headers+'"')
+    options.add_argument('--user-agent="'+headers+'"')
+    #options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-setuid-sandbox")
+    options.add_argument("--start-maximized")
+    options.add_argument("--disable-notifications")
+    options.add_argument("--incognito")
         # 使用设置初始化webdriver
-    driver=webdriver.Chrome(ChromeDriverManager().install()) 
+    #driver=webdriver.Chrome(ChromeDriverManager().install())
+    driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=options)
+    #driver=webdriver.Opera(executable_path=OperaDriverManager().install(), options=chrome_options)
+    
 
     
     
@@ -65,6 +75,8 @@ if __name__ == '__main__':
         driver.set_page_load_timeout(30)
             # 访问网页
         driver.get(url)
+        time.sleep(5)
+            
             # 退出当前浏览器
         driver.close()
             # 延迟1~3秒继续
