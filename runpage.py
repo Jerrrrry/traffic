@@ -52,6 +52,7 @@ if __name__ == '__main__':
         # 使用chrome自定义
     options = webdriver.ChromeOptions()
         # 设置代理
+    options.add_argument("--headless") 
     options.add_argument('--proxy-server='+proxy)
         # 设置UA
     options.add_argument('--user-agent="'+headers+'"')
