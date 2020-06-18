@@ -54,17 +54,24 @@ def get_URL():
  
 # 获取代理IP
 def get_ip():
-    # 这里填写大象代理api地址，num参数必须为1，每次只请求一个IP地址
-    token=get_token()
-    url = 'https://api.getproxylist.com/proxy?country[]=US&lastTested=600&maxConnectTime=1&protocol[]=socks4&apiKey='+token
-    response = requests.get(url)
-    response.close()
-    
-    ip = response.json()['ip']
-    port=str(response.json()['port'])
-    result='socks4://'+ip+':'+port
-    print(result)
-    return result
+    try:
+        # 这里填写大象代理api地址，num参数必须为1，每次只请求一个IP地址
+        token=get_token()
+        url = 'https://api.getproxylist.com/proxy?country[]=US&lastTested=600&maxConnectTime=1&protocol[]=socks4&apiKey='+token
+        response = requests.get(url)
+        response.close()
+        
+        ip = response.json()['ip']
+        port=str(response.json()['port'])
+        result='socks4://'+ip+':'+port
+        print(result)
+        return result
+    except:
+        print('no ip available')
+        return ''
+    finally:
+        pass
+ 
  
  
 if __name__ == '__main__':
@@ -84,7 +91,8 @@ if __name__ == '__main__':
         user_agent = ua.random
         print(user_agent)
         options.add_argument("--headless") 
-        options.add_argument('--proxy-server='+proxy)
+        if proxy!=='':
+            options.add_argument('--proxy-server='+proxy)
         # 设置UA
         options.add_argument(f'user-agent={user_agent}')
         #options.add_argument('--user-agent="'+headers+'"')
@@ -102,7 +110,7 @@ if __name__ == '__main__':
             driver.set_page_load_timeout(30)
             # 访问网页
             driver.get(url)
-            time.sleep(5)
+            time.sleep(60)
             # 退出当前浏览器
             driver.close()
             # 延迟1~3秒继续
