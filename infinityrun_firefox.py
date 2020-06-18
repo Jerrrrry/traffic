@@ -4,9 +4,12 @@ import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.opera import OperaDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 import sys
 import os
 import json
+from fake_useragent import UserAgent
+from shutil import which
 
 
 def get_token():
@@ -18,7 +21,7 @@ def get_UA():
     UA_list = [
         "Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Safari/535.19",
         "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:63.0) Gecko/20100101 Firefox/63.0"
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:63.0) Gecko/20100101 Firefox/63.0",
         #"Mozilla/5.0 (Linux; U; Android 4.0.4; en-gb; GT-I9300 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30",
         #"Mozilla/5.0 (Linux; U; Android 2.2; en-gb; GT-P1000 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
         "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:21.0) Gecko/20100101 Firefox/21.0",
@@ -66,26 +69,34 @@ def get_ip():
  
 if __name__ == '__main__':
     while 1:
+        FIREFOXPATH = which("firefox")
         url = get_URL()
         # 无限循环
         # 调用函数获取浏览器标识, 字符串
-        headers = get_UA()
+        #headers = get_UA()
         # 调用函数获取IP代理地址,这里获取是字符串，而不是像前两个教程获得的是数组
         proxy = get_ip()
         # 使用chrome自定义
         options = webdriver.ChromeOptions()
         # 设置代理
+        ua = UserAgent()
+        a = ua.random
+        user_agent = ua.random
+        print(user_agent)
         options.add_argument("--headless") 
         options.add_argument('--proxy-server='+proxy)
         # 设置UA
-        options.add_argument('--user-agent="'+headers+'"')
+        options.add_argument(f'user-agent={user_agent}')
+        #options.add_argument('--user-agent="'+headers+'"')
         #options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-setuid-sandbox")
         options.add_argument("--start-maximized")
         options.add_argument("--disable-notifications")
         options.add_argument("--incognito")
-        driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=options)
+        options.binary = FIREFOXPATH
+        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(),firefox_options=options)
+        #driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=options)
         try:
             # 访问超时30秒
             driver.set_page_load_timeout(30)
