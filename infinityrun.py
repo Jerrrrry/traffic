@@ -87,7 +87,7 @@ if __name__ == '__main__':
         user_agent = ua.random
         print(user_agent)
         options.add_argument("--headless")
-        if proxy!=='':
+        if proxy!='':
             options.add_argument('--proxy-server='+proxy) 
         # 设置UA
         options.add_argument(f'user-agent={user_agent}')
@@ -104,7 +104,7 @@ if __name__ == '__main__':
             driver.set_page_load_timeout(30)
             # 访问网页
             driver.get(url)
-            time.sleep(5)
+            time.sleep(60)
             # 退出当前浏览器
             driver.close()
             # 延迟1~3秒继续
