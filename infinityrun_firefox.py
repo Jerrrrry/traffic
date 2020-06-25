@@ -94,16 +94,17 @@ if __name__ == '__main__':
         if proxy!='':
             options.add_argument('--proxy-server='+proxy)
         # 设置UA
-        options.add_argument(f'user-agent={user_agent}')
+        options.add_argument('--user-agent="'+user_agent+'"')
         #options.add_argument('--user-agent="'+headers+'"')
         #options.add_argument("--headless")
+        options.add_argument("--user-data-dir=~/Library/Application Support/Google/Chrome/Profile 1")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-setuid-sandbox")
         options.add_argument("--start-maximized")
         options.add_argument("--disable-notifications")
         options.add_argument("--incognito")
         options.binary = FIREFOXPATH
-        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(),firefox_options=options)
+        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(),options=options)
         #driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=options)
         try:
             # 访问超时30秒
