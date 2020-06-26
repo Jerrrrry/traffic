@@ -96,7 +96,7 @@ if __name__ == '__main__':
         # 调用函数获取浏览器标识, 字符串
         #headers = get_UA()
         # 调用函数获取IP代理地址,这里获取是字符串，而不是像前两个教程获得的是数组
-        proxy = get_ip()
+        proxy = get_proxy()
         # 使用chrome自定义
         options = webdriver.ChromeOptions()
         # 设置代理
