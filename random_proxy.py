@@ -73,7 +73,7 @@ def get_proxy():
     try:
         # 这里填写大象代理api地址，num参数必须为1，每次只请求一个IP地址
         token=get_token()
-        url = 'https://api.getproxylist.com/proxy?country[]=US&lastTested=600&maxConnectTime=1&apiKey='+token
+        url = 'https://api.getproxylist.com/proxy?country[]=US&lastTested=600&maxConnectTime=1&&protocol[]=socks4&protocol[]=socks5&apiKey='+token
         response = requests.get(url)
         response.close()
         protocol=str(response.json()['protocol'])
