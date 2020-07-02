@@ -82,7 +82,7 @@ def get_proxy():
         print(result)
         return result
     except:
-        print('no ip available')
+        print(e)
         return ''
     finally:
         pass
