@@ -23,3 +23,14 @@ python3.7 -m pip install pip
 
 python3.7 -m pip install <module>
 pip install --upgrade pip
+
+
+windows setup 
+
+1. Install python3 
+
+2.  pip3 install selenium
+    pip3 install webdriver_manager
+    pip3 install fake_useragent
+
+3. python vr.py
