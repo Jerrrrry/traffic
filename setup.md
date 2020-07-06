@@ -15,6 +15,12 @@ a = ua.random
 user_agent = ua.random
 print(user_agent)
 
+pip install 
+http-request-randomizer
+tornado
+
+nose 
+
 
 
 server side 

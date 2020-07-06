@@ -7,7 +7,7 @@ const sleep=time=>{
     setTimeout(resolve,time)
   })
 }
-
+const screenshot = 'youtube_fm_dreams_video.png'
 
  //start one ip and one brwoser
  const oneRun = async _ => {
@@ -24,7 +24,7 @@ const sleep=time=>{
           const url='socks4://'+proxy.ip+':'+proxy.port
   
           let launchOptions = {
-            headless:false,
+            headless:true,
             args: [
               '--no-sandbox',
               '--disable-setuid-sandbox',
@@ -36,7 +36,7 @@ const sleep=time=>{
           try{
             const page = await browser.newPage()
             //await page.emulate(iPhone);
-            await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36');
+            //await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36');
             
             await page.goto('https://www.google.com/', {
                           waitUntil: 'networkidle2',
@@ -44,7 +44,8 @@ const sleep=time=>{
             })    
             const title = await page.title()
             await page.type('input.gLFyf.gsfi', '洛杉矶潜水课程');
-			page.keyboard.press('Enter');
+            page.keyboard.press('Enter');
+            await page.screenshot({ path: screenshot })
            
             await sleep(20000)
             const userAgent = await page.evaluate(() => navigator.userAgent );

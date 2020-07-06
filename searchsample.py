@@ -12,6 +12,7 @@ import json
 import pickle
 
 
+
 def get_token():
     with open('cred.json') as json_file:
         data = json.load(json_file)
@@ -35,7 +36,7 @@ def get_ip():
  
  
 if __name__ == '__main__':
-    url = "https://www.google.com/search?q=洛杉矶潜水&oq=洛杉矶潜水"
+    url = "https://www.google.com"
     # 无限循环，每次都要打开一个浏览器窗口，不是标签
     # 调用函数获取浏览器标识, 字符串
     proxy = get_ip()
@@ -70,16 +71,18 @@ if __name__ == '__main__':
             # 访问超时30秒
         driver.set_page_load_timeout(30)
         
-            # 访问网页
-        
-        driver.get('https://www.google.com/')
-        cookies = pickle.load(open("cookies.pkl", "rb"))
-        for cookie in cookies:
-            driver.add_cookie(cookie)
+        # cookies = pickle.load(open("cookies.pkl", "rb"))
+        # for cookie in cookies:
+        #     driver.add_cookie(cookie)
         driver.get(url)
+        time.sleep(random.randint(0, 15))
+        search = driver.find_element_by_name('q')
+        search.send_keys("google search through python")
+        time.sleep(random.randint(0, 15))
+        search.send_keys(Keys.RETURN)
         
        
-        time.sleep(5)
+        time.sleep(random.randint(0, 10))
             
             # 退出当前浏览器
         driver.close()
