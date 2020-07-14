@@ -36,7 +36,7 @@ def get_proxy():
  
 if __name__ == '__main__':
     while 1:
-        url = "https://loveplanet.today/post/best-vr-gaming-in-los-angeles"
+        url = "https://loveplanet.today/post/best-diving-club-in-los-angeles"
         # 无限循环
         # 调用函数获取浏览器标识, 字符串
         #headers = get_UA()
@@ -48,6 +48,7 @@ if __name__ == '__main__':
         a = ua.random
         user_agent = ua.random
         print(user_agent)
+        options.add_argument("--headless")
         options.add_argument('--user-agent="'+user_agent+'"')
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-setuid-sandbox")
@@ -64,7 +65,7 @@ if __name__ == '__main__':
             driver.find_element_by_link_text("website").click()
             time.sleep(random.randint(1, 5))
 
-            driver.find_element_by_link_text("BOOK NOW").click()
+            driver.find_element_by_link_text("开放水域潜水员课程").click()
             time.sleep(5)
             # 退出当前浏览器
             driver.quit()

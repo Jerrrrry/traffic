@@ -49,7 +49,7 @@ if __name__ == '__main__':
         a = ua.random
         user_agent = ua.random
         print(user_agent)
-        #options.add_argument("--headless")
+        options.add_argument("--headless")
         if proxy!='':
             options.add_argument('--proxy-server='+proxy) 
         options.add_argument('--user-agent="'+user_agent+'"')

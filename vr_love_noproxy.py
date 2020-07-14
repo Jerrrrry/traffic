@@ -1,4 +1,3 @@
-#https://www.asdscuba.com/zh/home
 import random
 import requests
 import time
@@ -17,25 +16,6 @@ def get_token():
         return data['token']
 
  
-# 获取代理IP
-def get_ip():
-    try:
-        # 这里填写大象代理api地址，num参数必须为1，每次只请求一个IP地址
-        token=get_token()
-        url = 'https://api.getproxylist.com/proxy?country[]=US&lastTested=600&maxConnectTime=1&protocol[]=socks4&apiKey='+token
-        response = requests.get(url)
-        response.close()
-        
-        ip = response.json()['ip']
-        port=str(response.json()['port'])
-        result='socks4://'+ip+':'+port
-        print(result)
-        return result
-    except:
-        print('no ip available')
-        return ''
-    finally:
-        pass
 def get_proxy():
     try:
         token=get_token()
@@ -49,7 +29,6 @@ def get_proxy():
         print(result)
         return result
     except:
-        print(e)
         return ''
     finally:
         pass
@@ -57,12 +36,11 @@ def get_proxy():
  
 if __name__ == '__main__':
     while 1:
-        url = "https://www.asdscuba.com/zh/classcatalog/open-water-beach-and-boat-full-package"
+        url = "https://loveplanet.today/post/best-vr-gaming-in-los-angeles"
         # 无限循环
         # 调用函数获取浏览器标识, 字符串
         #headers = get_UA()
         # 调用函数获取IP代理地址,这里获取是字符串，而不是像前两个教程获得的是数组
-        proxy = get_ip()
         # 使用chrome自定义
         options = webdriver.ChromeOptions()
         # 设置代理
@@ -71,12 +49,7 @@ if __name__ == '__main__':
         user_agent = ua.random
         print(user_agent)
         options.add_argument("--headless")
-        if proxy!='':
-            options.add_argument('--proxy-server='+proxy) 
-        # 设置UA
         options.add_argument('--user-agent="'+user_agent+'"')
-        #options.add_argument('--user-agent="'+headers+'"')
-        #options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-setuid-sandbox")
         options.add_argument("--start-maximized")
@@ -88,9 +61,14 @@ if __name__ == '__main__':
             driver.set_page_load_timeout(30)
             # 访问网页
             driver.get(url)
-            time.sleep(60)
+            time.sleep(random.randint(1, 5))
+            driver.find_element_by_link_text("website").click()
+            time.sleep(random.randint(1, 5))
+
+            driver.find_element_by_link_text("BOOK NOW").click()
+            time.sleep(5)
             # 退出当前浏览器
-            driver.close()
+            driver.quit()
             # 延迟1~3秒继续
             time_delay = random.randint(1, 3)
             while time_delay > 0:
